@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f0f8ff;
+    color: #333;
+}
+
+.hero {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(to right, #05627b, #042246);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero .btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: #031429;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.section {
+    padding: 40px;
+    text-align: center;
+}
+
+footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
