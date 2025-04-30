@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        
+        {% if cart_items %}
+            <ul class="cart-list">
+                {% for item in cart_items %}
+                    <li class="cart-item">
+                        <span class="item-name">{{ item.product.name }}</span>
+                        <span class="item-qty">Qty: {{ item.quantity }}</span>
+                        <span class="item-price">₹{{ item.subtotal }}</span>
+                        <a class="btn-remove" href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="cart-summary">
+                <h3>Total: ₹{{ total }}</h3>
+                <div class="btn-group">
+                    <a href="{% url 'home' %}" class="btn-shop">Continue Shopping</a>
+                    <a href="{% url 'buy_cart_items' %}" class="btn-checkout">Buy</a>
+
+                </div>
+            </div>
+        {% else %}
+            <p class="empty-cart">Your cart is empty.</p>
+            <a href="{% url 'home' %}" class="btn-shop">Start Shopping</a>
+        {% endif %}
+    </div>
+</body>
+</html>

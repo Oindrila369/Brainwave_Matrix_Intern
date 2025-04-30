@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% if messages %}
+        <div class="message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <header>
+        <div class="container">
+            <h1>Welcome to My Store</h1>
+            <div class="header-buttons">
+                <a href="{% url 'wishlist' %}" class="header-btn">Wishlist</a>
+                <a href="{% url 'view_cart' %}" class="header-btn">Cart</a>
+
+                <a href="{% url 'my_orders' %}" class="header-btn">My Orders</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                {% else %}
+                    <img src="{% static 'images/default-product.jpg' %}" alt="No image available" class="product-image">
+                {% endif %}
+                
+                <div class="product-info">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p class="price">₹{{ product.price }}</p>
+
+                    <!-- Quantity Selector -->
+                    <label for="quantity-{{ product.id }}">Quantity:</label>
+                    <select id="quantity-{{ product.id }}" name="quantity" class="quantity-dropdown">
+                        {% for i in "12345" %}
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Add to Cart Button -->
+                    <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart">Add to Cart</a>
+
+                    <!-- Wishlist Button -->
+                    <a href="#" class="wishlist-btn">♡ Add to Wishlist</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Store</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
